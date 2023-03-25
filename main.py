@@ -17,10 +17,12 @@ tank_group.add(tank1)
 screen.fill("red")
 
 gridSquare_group = pygame.sprite.Group()
+walls = dict()
 for x in range(11):
     for y in range(9):
         currSquare = GridSquare(x, y)
         gridSquare_group.add(currSquare)
+        walls[(x,y)] = currSquare.isWall
 
 #from https://www.pygame.org/docs/
 while running:
