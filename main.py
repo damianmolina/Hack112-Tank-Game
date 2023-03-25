@@ -49,7 +49,7 @@ while running:
 
     gridSquare_group.draw(screen)
     tank_group.draw(screen)
-
+    pygame.draw.rect(screen, 'white', pygame.Rect(25, 125, 550, 450), 2)
     clock.tick(60)
 
 pygame.quit()
