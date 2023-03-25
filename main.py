@@ -31,13 +31,13 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and tank1.rect.center[0] >= 0:
         tank1.moveTank(xSpeed * -1, 0)
-    elif keys[pygame.K_RIGHT] and tank1.rect.center[1] <= width:
+    if keys[pygame.K_RIGHT] and tank1.rect.center[0] <= width:
         tank1.moveTank(xSpeed, 0)
     elif keys[pygame.K_UP] and tank1.rect.center[1] > 0:
-        tank1.rect.center[1] -= speed
+        tank1.moveTank(0, ySpeed * -1)
     elif keys[pygame.K_DOWN] and tank1.rect.center[1]  < height:
-        tank1.rect.center[1] += speed
-
+        tank1.moveTank(0, ySpeed)
+    screen.fill("red") #THIS FUCKS SHIT UP
     clock.tick(60)
 
 pygame.quit()

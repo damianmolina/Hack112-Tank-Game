@@ -13,5 +13,7 @@ class Tank(pygame.sprite.Sprite):
         self.lastMove = 2
 
     def moveTank(self, xSpeed, ySpeed):
-        self.rect.center = [self.x + xSpeed, self.y + ySpeed]
+        self.x += xSpeed
+        self.y += ySpeed
+        self.rect.center = [self.x, self.y]
         pygame.display.update()
