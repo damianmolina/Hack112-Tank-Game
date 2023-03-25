@@ -7,8 +7,11 @@ class Tank(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(color)
         self.rect = self.image.get_rect()
-        self.rect.center = [tx, ty]
+        self.x = tx
+        self.y = ty
+        self.rect.center = [self.x, self.y]
         self.lastMove = 2
 
     def moveTank(self, xSpeed, ySpeed):
-        self.rect.center += [xSpeed, ySpeed]
+        self.rect.center = [self.x + xSpeed, self.y + ySpeed]
+        pygame.display.update()
