@@ -18,8 +18,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill("red")
-
     pygame.display.flip()
 
     tank_group.draw(screen)
