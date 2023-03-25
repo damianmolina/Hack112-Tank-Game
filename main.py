@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-tank1 = Tank(50, 50, 200, 200, (255,255,255))
+tank1 = Tank(50, 50, 200, 200)
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 screen.fill("red")
