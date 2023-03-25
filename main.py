@@ -12,6 +12,7 @@ running = True
 tank1 = Tank(25, 25, 200, 200, (255,255,255))
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
+screen.fill("red")
 
 #from https://www.pygame.org/docs/
 while running:
@@ -26,6 +27,5 @@ while running:
     pygame.draw.rect(screen, "white", pygame.Rect(25,125,550,450), 2)
 
     clock.tick(60)
-
 
 pygame.quit()
