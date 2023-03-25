@@ -14,7 +14,6 @@ while running:
 
     screen.fill("purple")
 
-
     pygame.display.flip()
 
     clock.tick(60)
