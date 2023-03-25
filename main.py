@@ -2,9 +2,8 @@ import pygame
 from tankClass import Tank
 from board import GridSquare
 
-pygame.init()
-
 #screen init
+pygame.init()
 width = 600
 height = 600
 screen = pygame.display.set_mode((width, height))
@@ -16,11 +15,12 @@ screen.fill("red")
 #tank group
 tankWidth, tankHeight = 50, 50
 tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
-tank1 = Tank(25, 25, 200, 200, (255,255,255))
+tank1 = Tank(25, 25, 200, 200, (255,255,255), 1)
 
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 xSpeed, ySpeed = 10, 10
+screen.fill("red")
 
 gridSquare_group = pygame.sprite.Group()
 for x in range(11):
@@ -33,6 +33,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
     pygame.display.flip()
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
@@ -48,8 +49,10 @@ while running:
 
     #draw tank
     screen.fill("red")
+
     tank_group.draw(screen)
 
+    tank_group.draw(screen)
 
     gridSquare_group.draw(screen)
 
