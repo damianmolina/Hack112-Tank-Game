@@ -14,6 +14,7 @@ tankWidth, tankHeight = 50, 50
 tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
+xSpeed, ySpeed = 10, 10
 screen.fill("red")
 
 gridSquare_group = pygame.sprite.Group()
@@ -46,6 +47,7 @@ while running:
     #draw tank
     screen.fill("red")
 
+    gridSquare_group.draw(screen)
     tank_group.draw(screen)
 
     clock.tick(60)
