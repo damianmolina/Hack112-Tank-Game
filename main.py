@@ -1,9 +1,8 @@
 import pygame
 from tankClass import Tank
 
-pygame.init()
-
 #screen init
+pygame.init()
 width = 600
 height = 600
 screen = pygame.display.set_mode((width, height))
@@ -17,12 +16,14 @@ tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 xSpeed, ySpeed = 10, 10
+screen.fill("red")
 
 #from https://www.pygame.org/docs/
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
     pygame.display.flip()
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
@@ -38,6 +39,9 @@ while running:
 
     #draw tank
     screen.fill("red")
+
+    tank_group.draw(screen)
+
     tank_group.draw(screen)
 
     clock.tick(60)
