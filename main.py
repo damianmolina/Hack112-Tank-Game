@@ -1,22 +1,28 @@
 import pygame
 from tankClass import Tank
+from board import GridSquare
 
-#screen init
 pygame.init()
 width = 600
 height = 600
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-screen.fill("red")
 
 #tank group
 tankWidth, tankHeight = 50, 50
 tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
-xSpeed, ySpeed = 10, 10
 screen.fill("red")
+
+gridSquare_group = pygame.sprite.Group()
+walls = dict()
+for x in range(11):
+    for y in range(9):
+        currSquare = GridSquare(x, y)
+        gridSquare_group.add(currSquare)
+        walls[(x,y)] = currSquare.isWall
 
 #from https://www.pygame.org/docs/
 while running:
@@ -39,8 +45,6 @@ while running:
 
     #draw tank
     screen.fill("red")
-
-    tank_group.draw(screen)
 
     tank_group.draw(screen)
 
