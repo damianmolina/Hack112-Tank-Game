@@ -1,5 +1,6 @@
 import pygame
 from tankClass import Tank
+from board import GridSquare
 
 pygame.init()
 width = 600
