@@ -32,14 +32,6 @@ while running:
 
     pygame.display.flip()
 
-<<<<<<< Updated upstream
-    tank_group.draw(screen)
-
-    gridSquare_group.draw(screen)
-
-    pygame.draw.rect(screen, "white", pygame.Rect(25,125,550,450), 2)
-
-=======
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 0:
@@ -53,9 +45,9 @@ while running:
 
     #draw tank
     screen.fill("red")
+
     tank_group.draw(screen)
 
->>>>>>> Stashed changes
     clock.tick(60)
 
 pygame.quit()
