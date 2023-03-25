@@ -1,4 +1,3 @@
-import math
 class Bullet:
     bulletList = []
     def __init__(self, cx, cy, dir):
@@ -51,6 +50,14 @@ class Bullet:
     def step(self):
         self.steps += 1
         self.move()
+    
+    def bounce(self):
+        if not self.hasBounced:
+            self.dir = -self.dir
+            self.hasBounced = True
+        else:
+            self.destroy = True
+    
 
-
-
+b1 = Bullet(150, 150, -2)
+print(str(b1))
