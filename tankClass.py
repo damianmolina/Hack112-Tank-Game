@@ -3,7 +3,7 @@ import pygame
 #from https://www.youtube.com/watch?v=hDu8mcAlY4E
 class Tank(pygame.sprite.Sprite):
 
-    def __init__(self, width, height, tx, ty, color, lastMove):
+    def __init__(self, width, height, tx, ty, lastMove):
         super().__init__()
         self.image = pygame.Surface([width, height])
         self.image = pygame.image.load("tankBase.png")

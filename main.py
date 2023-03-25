@@ -9,8 +9,9 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-
-tank1 = Tank(50, 50, 200, 200)
+tankHeight = 50
+tankWidth = 50
+tank1 = Tank(50, 50, 200, 200, 2)
 
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
