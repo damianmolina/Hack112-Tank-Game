@@ -9,7 +9,13 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
+<<<<<<< Updated upstream
 tank1 = Tank(25, 25, 200, 200, (255,255,255))
+=======
+#tank group
+tankWidth, tankHeight = 50, 50
+tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
+>>>>>>> Stashed changes
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 screen.fill("red")
@@ -28,12 +34,30 @@ while running:
 
     pygame.display.flip()
 
+<<<<<<< Updated upstream
     tank_group.draw(screen)
 
     gridSquare_group.draw(screen)
 
     pygame.draw.rect(screen, "white", pygame.Rect(25,125,550,450), 2)
 
+=======
+    #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 0:
+        tank1.moveTank(xSpeed * -1, 0)
+    elif keys[pygame.K_RIGHT] and tank1.rect.center[0] + tankWidth <= width:
+        tank1.moveTank(xSpeed, 0)
+    elif keys[pygame.K_UP] and tank1.rect.center[1] - tankHeight > 0:
+        tank1.moveTank(0, ySpeed * -1)
+    elif keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < height:
+        tank1.moveTank(0, ySpeed)
+
+    #draw tank
+    screen.fill("red")
+    tank_group.draw(screen)
+
+>>>>>>> Stashed changes
     clock.tick(60)
 
 pygame.quit()
