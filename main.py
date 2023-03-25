@@ -14,6 +14,12 @@ tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 screen.fill("red")
 
+gridSquare_group = pygame.sprite.Group()
+for x in range(11):
+    for y in range(9):
+        currSquare = GridSquare(x, y)
+        gridSquare_group.add(currSquare)
+
 #from https://www.pygame.org/docs/
 while running:
     for event in pygame.event.get():
@@ -23,6 +29,8 @@ while running:
     pygame.display.flip()
 
     tank_group.draw(screen)
+
+    gridSquare_group.draw(screen)
 
     pygame.draw.rect(screen, "white", pygame.Rect(25,125,550,450), 2)
 
