@@ -1,4 +1,0 @@
-def fn():
-    x = 2
-    while True:
-        print(x ** 2)
