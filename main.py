@@ -11,6 +11,7 @@ running = True
 tank1 = Tank(50, 50, 200, 200, (255,255,255))
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
+screen.fill("red")
 
 #from https://www.pygame.org/docs/
 while running:
@@ -18,13 +19,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill("red")
-
     pygame.display.flip()
 
     tank_group.draw(screen)
-
     clock.tick(60)
-
 
 pygame.quit()
