@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-tank1 = Tank(50, 50, 200, 200, (255,255,255))
+tank1 = Tank(25, 25, 200, 200, (255,255,255))
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 
@@ -21,6 +21,8 @@ while running:
     pygame.display.flip()
 
     tank_group.draw(screen)
+
+    pygame.draw.rect(screen, "white", pygame.Rect(25,125,550,450), 2)
 
     clock.tick(60)
 
