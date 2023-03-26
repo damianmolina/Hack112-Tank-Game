@@ -52,22 +52,22 @@ while running:
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 20:
-        tank1.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_RIGHT] and tank1.rect.center[0] + tankWidth <= 580:
-        tank1.moveTank(xSpeed, 0)
-    if keys[pygame.K_UP] and tank1.rect.center[1] - tankHeight > 120:
-        tank1.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < 580:
-        tank1.moveTank(0, ySpeed)
-    if keys[pygame.K_a] and tank2.rect.center[0] - tankWidth >= 20:
+    if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
         tank2.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_d] and tank2.rect.center[0] + tankWidth <= 580:
+    if keys[pygame.K_RIGHT] and tank2.rect.center[0] + tankWidth <= 580:
         tank2.moveTank(xSpeed, 0)
-    if keys[pygame.K_w] and tank2.rect.center[1] - tankHeight > 120:
+    if keys[pygame.K_UP] and tank2.rect.center[1] - tankHeight > 120:
         tank2.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_s] and tank2.rect.center[1] + tankHeight < 580:
+    if keys[pygame.K_DOWN] and tank2.rect.center[1] + tankHeight < 580:
         tank2.moveTank(0, ySpeed)
+    if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:
+        tank1.moveTank(xSpeed * -1, 0)
+    if keys[pygame.K_d] and tank1.rect.center[0] + tankWidth <= 580:
+        tank1.moveTank(xSpeed, 0)
+    if keys[pygame.K_w] and tank1.rect.center[1] - tankHeight > 120:
+        tank1.moveTank(0, ySpeed * -1)
+    if keys[pygame.K_s] and tank1.rect.center[1] + tankHeight < 580:
+        tank1.moveTank(0, ySpeed)
 
 
     #draw tank
