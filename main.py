@@ -5,6 +5,7 @@ from gameInfo import GameInfo
 from bulletClass import Bullet
 pygame.font.init()
 
+
 def checkBullet(bullet):
     if bullet.cx <= 35:
         while bullet.cx <= 35: bullet.cx += 1
