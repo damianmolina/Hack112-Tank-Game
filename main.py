@@ -177,6 +177,7 @@ while running:
                         gridSquare_group.add(currSquare)
                         walls[(x,y)] = currSquare.isWall
                 tank1.respawn()
+                tank1.health = 3
             tank2TimeSinceLastBullet = steps
 
 
@@ -195,6 +196,7 @@ while running:
                         gridSquare_group.add(currSquare)
                         walls[(x,y)] = currSquare.isWall
                 tank2.respawn()
+                tank2.health = 3
 
 
 
