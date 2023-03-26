@@ -1,13 +1,18 @@
-class Bullet:
+import pygame
+class Bullet(pygame.sprite.Sprite):
+
     bulletList = []
-    def __init__(self, cx, cy, dir):
-        self.cx = cx
-        self.cy = cy
+    def __init__(self, width, height, color, cx, cy, dir):
+        super().__init__()
+        self.image = pygame.Surface([width, height])
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.center=[cx, cy]
         self.dir = dir
         self.hasBounced = False
         self.steps = 0
         self.destroy = False
-        Bullet.bulletList.append(self)
+        
     
     def __repr__(self):
         return f'Bullet(cx={self.cx}, cy={self.cy})'
@@ -20,32 +25,32 @@ class Bullet:
     def move(self):
         if self.dir == 1:
             if self.steps % 2:
-                self.cx -= 1
+                self.rect.center[0] -= 1
             else:
-                self.cy -= 1
+                self.rect.center[1] -= 1
         elif self.dir == 2:
-            self.cy -= 1
+            self.rect.center[1] -= 1
         elif self.dir == 3:
             if self.steps % 2:
-                self.cx += 1
+                self.rect.center[0] += 1
             else:
-                self.cy -= 1
+                self.rect.center[1] -= 1
         elif self.dir == 4:
-            self.cx -= 1
+            self.rect.center[0] -= 1
         elif self.dir == -4:
-            self.cx += 1
+            self.rect.center[0] += 1
         elif self.dir == -1:
             if self.steps % 2:
-                self.cx -= 1
+                self.rect.center[0] -= 1
             else:
-                self.cy += 1
+                self.rect.center[1] += 1
         elif self.dir == -2:
-            self.cy += 1
+            self.rect.center[1] += 1
         else:
             if self.steps % 2:
-                self.cx += 1
+                self.rect.center[0] += 1
             else:
-                self.cy += 1
+                self.rect.center[1] += 1
     
     def step(self):
         self.steps += 1
@@ -58,6 +63,3 @@ class Bullet:
         else:
             self.destroy = True
     
-
-b1 = Bullet(150, 150, -2)
-print(str(b1))
