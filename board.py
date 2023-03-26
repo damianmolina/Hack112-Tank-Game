@@ -13,10 +13,11 @@ class GridSquare(pygame.sprite.Sprite):
         if random.choice(odds) and (xPos,yPos)!=(1,4) and (xPos,yPos)!=(9,4):
             self.isWall = True
         else: self.isWall = False
-        if self.isWall: color = "blue"
-        else: color = "red"
-        self.image = pygame.Surface([50,50])
-        self.image.fill(color)
+        if self.isWall:
+            self.image = pygame.image.load('brick.png')
+        else: 
+            self.image = pygame.image.load("grass.jpg")
+        self.image = pygame.transform.scale(self.image, (50,50))
         self.rect = self.image.get_rect()
         self.rect.center = (cX, cY)
     
