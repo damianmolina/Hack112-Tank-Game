@@ -98,6 +98,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    if (steps % 1000 < 20):
+        kosbie = pygame.image.load("king.png")
+        pygame.transform.scale(kosbie, (600, 600))
+        screen.blit(kosbie, (0, 0))
     printText("SCORES",font,(0,0,0),173,40)
     printText(f"Player1: {gameInfo.p1score}",font,(0,0,0),170,60)
     printText(f"Player2: {gameInfo.p2score}",font,(0,0,0),170,85)
