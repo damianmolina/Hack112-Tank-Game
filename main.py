@@ -59,7 +59,8 @@ xSpeed, ySpeed = 3, 3
 bgColor = 129,152,156
 screen.fill(bgColor)
 
-bullet_group = pygame.sprite.Group()
+bullet_group1 = pygame.sprite.Group()
+bullet_group2 = pygame.sprite.Group()
 tank1BulletCount = 0
 tank2BulletCount = 0
 tank1Direction = -4
@@ -100,31 +101,31 @@ while running:
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygamae/
     keys = pygame.key.get_pressed()
 
-    for bullet in bullet_group:
+    for bullet in bullet_group1:
+        checkBullet(bullet)
+    for bullet in bullet_group2:
         checkBullet(bullet)
 
     if keys[pygame.K_LSHIFT] and tank1BulletCount < 3:
         if tank1BulletCount == 0:
-            bullet0 = Bullet(20, 20, tank1.x, tank1.y, tank1Direction)
             tank1Steps = steps
-            bullet_group.add(bullet0)
+            bullet_group1.add(Bullet(20, 20, tank1.x, tank1.y, tank1Direction))
             tank1BulletCount += 1
         elif steps - tank1Steps > 60:
-            bullet1 = Bullet(20, 20, tank1.x, tank1.y, tank1Direction)
-            bullet_group.add(bullet1)
+            bullet_group1.add(Bullet(20, 20, tank1.x, tank1.y, tank1Direction))
             tank1BulletCount += 1
     if keys[pygame.K_RSHIFT] and tank2BulletCount < 3:
         if tank2BulletCount == 0:
-            bullet2 = Bullet(20, 20, tank2.x, tank2.y, tank2Direction)
-            bullet_group.add(bullet2)
+            bullet_group2.add(Bullet(20, 20, tank2.x, tank2.y, tank2Direction))
             tank2BulletCount += 1
             tank2Steps = steps
         elif steps - tank2Steps > 60:
-            bullet3 = Bullet(20, 20, tank2.x, tank2.y, tank2Direction)
-            bullet_group.add(bullet3)
+            bullet_group2.add(Bullet(20, 20, tank2.x, tank2.y, tank2Direction))
             tank2BulletCount += 1
     if steps % 5 == 0:
-        for bullet in bullet_group:
+        for bullet in bullet_group1:
+            bullet.move(bullet.dx, bullet.dy)
+        for bullet in bullet_group2:
             bullet.move(bullet.dx, bullet.dy)
 
     if not collideAny(tank1.x, tank1.y, walls):
@@ -204,7 +205,8 @@ while running:
     gridSquare_group.draw(screen)
     tank_group.draw(screen)
     pygame.draw.rect(screen, 'white', pygame.Rect(25, 125, 550, 450), 2)
-    bullet_group.draw(screen)
+    bullet_group1.draw(screen)
+    bullet_group2.draw(screen)
     clock.tick(60)
 
 pygame.quit()
