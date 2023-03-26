@@ -8,6 +8,8 @@ class Tank(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image = pygame.image.load("tankRight.png")
         self.rect = self.image.get_rect()
+        self.spawnX = tx
+        self.spawnY = ty
         self.x = tx
         self.originalHealth = health
         self.health = health
@@ -33,5 +35,11 @@ class Tank(pygame.sprite.Sprite):
     def noHealth(self): # checks if the tank has been defeated and resets its health
         if not self.health:
             self.health = self.originalHealth
+            self.respawn()
             return True
         return False
+    
+    def respawn(self):
+        self.x = self.spawnX
+        self.y = self.spawnY
+        self.rect.center = [self.x, self.y]
