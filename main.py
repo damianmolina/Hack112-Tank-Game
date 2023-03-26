@@ -25,6 +25,10 @@ height = 600
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
+upImage = pygame.image.load("tankUp.png")
+downImage = pygame.image.load("tankDown.png")
+rightImage = pygame.image.load("tankRight.png")
+leftImage = pygame.image.load("tankLeft.png")
 
 tankHeight = 25
 tankWidth = 25
@@ -86,6 +90,7 @@ while running:
             if collideAny(tank1.x, tank1.y, walls):
                 tank1.moveTank(0, ySpeed * -1)
 
+
     if not collideAny(tank2.x, tank2.y, walls):
         if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
             tank2.moveTank(xSpeed * -1, 0)
@@ -103,6 +108,24 @@ while running:
             tank2.moveTank(0, ySpeed)
             if collideAny(tank2.x, tank2.y, walls):
                 tank2.moveTank(0, ySpeed * -1)
+    
+    if (keys[pygame.K_a] and keys[pygame.K_w]):
+        tank1.image = pygame.transform.rotate(upImage, 45)
+    elif (keys[pygame.K_w] and keys[pygame.K_d]):
+        tank1.image = pygame.transform.rotate(rightImage, 45)
+    elif (keys[pygame.K_a] and keys[pygame.K_s]):
+        tank1.image = pygame.transform.rotate(leftImage, 45)
+    elif (keys[pygame.K_s] and keys[pygame.K_d]):
+        tank1.image = pygame.transform.rotate(downImage, 45)
+
+    if (keys[pygame.K_LEFT] and keys[pygame.K_UP]):
+        tank2.image = pygame.transform.rotate(upImage, 45)
+    elif (keys[pygame.K_UP] and keys[pygame.K_RIGHT]):
+        tank2.image = pygame.transform.rotate(rightImage, 45)
+    elif (keys[pygame.K_LEFT] and keys[pygame.K_DOWN]):
+        tank2.image = pygame.transform.rotate(leftImage, 45)
+    elif (keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]):
+        tank2.image = pygame.transform.rotate(downImage, 45)
 
     #draw tank
     screen.fill(bgColor)
