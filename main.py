@@ -5,12 +5,31 @@ from gameInfo import GameInfo
 from bulletClass import Bullet
 pygame.font.init()
 
+def collide(tankX, tankY, wallX, wallY):
+    wallLeft = 50*wallX + 25
+    wallRight = wallLeft + 50
+    wallTop = wallY * 50 + 125
+    wallBottom = wallTop + 50
+    if wallLeft<tankX+15<wallRight or wallLeft<tankX-15<wallRight:
+        if wallTop<tankY+15<wallBottom or wallTop<tankY-15<wallBottom:
+            return True
+    return False
+
+def collideAny(tankX, tankY, walls):
+    for item in walls:
+        if walls[item] and collide(tankX, tankY, item[0], item[1]): return True
+    return False
+
 pygame.init()
 width = 600
 height = 600
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
+upImage = pygame.image.load("tankUp.png")
+downImage = pygame.image.load("tankDown.png")
+rightImage = pygame.image.load("tankRight.png")
+leftImage = pygame.image.load("tankLeft.png")
 
 second = 0
 steps = 0
@@ -63,22 +82,7 @@ while running:
         second += 1
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
-        tank2.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_RIGHT] and tank2.rect.center[0] + tankWidth <= 580:
-        tank2.moveTank(xSpeed, 0)
-    if keys[pygame.K_UP] and tank2.rect.center[1] - tankHeight > 120:
-        tank2.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_DOWN] and tank2.rect.center[1] + tankHeight < 580:
-        tank2.moveTank(0, ySpeed)
-    if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:
-        tank1.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_d] and tank1.rect.center[0] + tankWidth <= 580:
-        tank1.moveTank(xSpeed, 0)
-    if keys[pygame.K_w] and tank1.rect.center[1] - tankHeight > 120:
-        tank1.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_s] and tank1.rect.center[1] + tankHeight < 580:
-        tank1.moveTank(0, ySpeed)
+
     if keys[pygame.K_LSHIFT] and tank1BulletCount < 3 and steps % 10:
         if tank1BulletCount == 0:
             bullet0 = Bullet(20, 20, tank1.x, tank1.y, 2)
@@ -104,6 +108,61 @@ while running:
             bullet.move()
 
 
+    if not collideAny(tank1.x, tank1.y, walls):
+        if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:
+            tank1.moveTank(xSpeed * -1, 0)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(xSpeed, 0)
+        if keys[pygame.K_d] and tank1.rect.center[0] + tankWidth <= 580:
+            tank1.moveTank(xSpeed, 0)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(xSpeed*-1, 0)
+        if keys[pygame.K_w] and tank1.rect.center[1] - tankHeight > 120:
+            tank1.moveTank(0, ySpeed * -1)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(0, ySpeed)
+        if keys[pygame.K_s] and tank1.rect.center[1] + tankHeight < 580:
+            tank1.moveTank(0, ySpeed)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(0, ySpeed * -1)
+
+
+    if not collideAny(tank2.x, tank2.y, walls):
+        if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
+            tank2.moveTank(xSpeed * -1, 0)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(xSpeed, 0)
+        if keys[pygame.K_RIGHT] and tank2.rect.center[0] + tankWidth <= 580:
+            tank2.moveTank(xSpeed, 0)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(xSpeed*-1, 0)
+        if keys[pygame.K_UP] and tank2.rect.center[1] - tankHeight > 120:
+            tank2.moveTank(0, ySpeed * -1)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(0, ySpeed)
+        if keys[pygame.K_DOWN] and tank2.rect.center[1] + tankHeight < 580:
+            tank2.moveTank(0, ySpeed)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(0, ySpeed * -1)
+    
+    if (keys[pygame.K_a] and keys[pygame.K_w]):
+        tank1.image = pygame.transform.rotate(upImage, 45)
+    elif (keys[pygame.K_w] and keys[pygame.K_d]):
+        tank1.image = pygame.transform.rotate(rightImage, 45)
+    elif (keys[pygame.K_a] and keys[pygame.K_s]):
+        tank1.image = pygame.transform.rotate(leftImage, 45)
+    elif (keys[pygame.K_s] and keys[pygame.K_d]):
+        tank1.image = pygame.transform.rotate(downImage, 45)
+
+
+    if (keys[pygame.K_LEFT] and keys[pygame.K_UP]):
+        tank2.image = pygame.transform.rotate(upImage, 45)
+    elif (keys[pygame.K_UP] and keys[pygame.K_RIGHT]):
+        tank2.image = pygame.transform.rotate(rightImage, 45)
+    elif (keys[pygame.K_LEFT] and keys[pygame.K_DOWN]):
+        tank2.image = pygame.transform.rotate(leftImage, 45)
+    elif (keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]):
+        tank2.image = pygame.transform.rotate(downImage, 45)
 
     #draw tank
     screen.fill(bgColor)
