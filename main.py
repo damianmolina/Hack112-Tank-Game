@@ -6,11 +6,17 @@ from bulletClass import Bullet
 pygame.font.init()
 
 def checkBullet(bullet):
-    if bullet.cx <= 35 or bullet.cx >= 565: 
-        bullet.move(-2*bullet.dx, 0)
+    if bullet.cx <= 35:
+        while bullet.cx <= 35: bullet.cx += 1
         bullet.bounce("LR")
-    if bullet.cy <= 135 or bullet.cy >= 565:
-        bullet.move(0, -2*bullet.dy)
+    if bullet.cx >= 565: 
+        while bullet.cx >= 565: bullet.cx -= 1
+        bullet.bounce("LR")
+    if bullet.cy <= 135:
+        while bullet.cy <= 135: bullet.cy += 1
+        bullet.bounce("TB")
+    if bullet.cy >= 565:
+        while bullet.cy >= 565: bullet.cy -= 1
         bullet.bounce("TB")
 
 def collide(tankX, tankY, wallX, wallY):
