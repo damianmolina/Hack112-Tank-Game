@@ -52,8 +52,6 @@ upImage = pygame.image.load("tankUp.png")
 downImage = pygame.image.load("tankDown.png")
 rightImage = pygame.image.load("tankRight.png")
 leftImage = pygame.image.load("tankLeft.png")
-tank1TimeSinceLastBullet = None
-tank2TimeSinceLastBUllet = None
 second = 0
 steps = 0
 tankHeight = 25
@@ -160,15 +158,18 @@ while running:
 
     for bullet in bullet_group1:
         if bulletHitsTank(bullet, tank2):
-            tank2.health -= 1
-            tank2.noHealth()
-            print(tank2.health)
+            tank1.health -= 1
+            if tank1.noHealth():
+                gameInfo.p1score += 1
+            tank2TimeSinceLastBullet = steps
+
 
     for bullet in bullet_group2:
         if bulletHitsTank(bullet, tank1):
             tank1.health -= 1
-            tank1.noHealth()
-            print(tank1.health)
+            if tank1.noHealth():
+                gameInfo.p2score += 1
+
 
 
     if not collideAny(tank2.x, tank2.y, walls):
