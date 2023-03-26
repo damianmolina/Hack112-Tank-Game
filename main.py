@@ -86,13 +86,13 @@ while running:
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygamae/
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LSHIFT] and tank1BulletCount < 3 and steps % 10:
+    if keys[pygame.K_LSHIFT] and tank1BulletCount < 3:
         if tank1BulletCount == 0:
             bullet0 = Bullet(20, 20, tank1.x, tank1.y, tank1Direction)
-            tank1Second = second
+            tank1Steps = steps
             bullet_group.add(bullet0)
             tank1BulletCount += 1
-        elif second != tank1Second:
+        elif steps - tank1Steps > 60:
             bullet1 = Bullet(20, 20, tank1.x, tank1.y, tank1Direction)
             bullet_group.add(bullet1)
             tank1BulletCount += 1
@@ -101,8 +101,8 @@ while running:
             bullet2 = Bullet(20, 20, tank2.x, tank2.y, tank2Direction)
             bullet_group.add(bullet2)
             tank2BulletCount += 1
-            tank2Second = second
-        elif second != tank2Second:
+            tank2Steps = steps
+        elif steps - tank2Steps > 60:
             bullet3 = Bullet(20, 20, tank2.x, tank2.y, tank2Direction)
             bullet_group.add(bullet3)
             tank2BulletCount += 1
