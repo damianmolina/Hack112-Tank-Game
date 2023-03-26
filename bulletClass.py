@@ -42,17 +42,17 @@ class Bullet(pygame.sprite.Sprite):
     def __repr__(self):
         return f'Bullet(cx={self.rect.center[0]}, cy={self.rect.center[1]})'
     
-    def __eq__(self, other):
-        return (isinstance(other, Bullet) and 
-                self.rect.center[0] == other.rect.center[0] and 
-                self.rect.center[1] == other.rect.center[1])
+    # def __eq__(self, other):
+    #     return (isinstance(other, Bullet) and 
+    #             self.rect.center[0] == other.rect.center[0] and 
+    #             self.rect.center[1] == other.rect.center[1])
     
-    def __hash__(self):
-        return hash(str(self))
+    # def __hash__(self):
+    #     return hash(str(self))
     
     def move(self, dx, dy):
-        self.cx += dx
-        self.cy += dy
+        self.cx += 20 * dx
+        self.cy += 20 * dy
         self.rect.center = [self.cx, self.cy]
     
     def bounce(self, dirCall):
