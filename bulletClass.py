@@ -56,5 +56,6 @@ class Bullet(pygame.sprite.Sprite):
                 self.dx = -self.dx
             self.hasBounced += 1
         else:
-            pygame.sprite.Sprite.kill(self)
+            self.kill()
+            return True
     
