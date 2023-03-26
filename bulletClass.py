@@ -17,25 +17,18 @@ class Bullet(pygame.sprite.Sprite):
         self.steps = 0
         self.destroy = False
         if dir == 1:
-            self.image = pygame.transform.rotate(self.image, 45)
             self.dx, self.dy = -1, -1
         if dir == 3:
-            self.image = pygame.transform.rotate(self.image, -45)
             self.dx, self.dy = 1, -1
         if dir == 4:
-            self.image = pygame.transform.rotate(self.image, 90)
             self.dx, self.dy = -1, 0
         if dir == -4:
-            self.image = pygame.transform.rotate(self.image, -90)
             self.dx, self.dy = 1, 0
         if dir == -1:
-            self.image = pygame.transform.rotate(self.image, 135)
             self.dx, self.dy = -1, 1
         if dir == -3:
-            self.image = pygame.transform.rotate(self.image, -135)
             self.dx, self.dy = 1, 1
         if dir == -2:
-            self.image = pygame.transform.rotate(self.image, 180)
             self.dx, self.dy = 0, 1
         
     

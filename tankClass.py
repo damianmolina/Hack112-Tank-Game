@@ -11,6 +11,7 @@ class Tank(pygame.sprite.Sprite):
         self.x = tx
         self.health = health
         self.y = ty
+        self.health = health
         self.rect.center = [self.x, self.y]
         self.lastMove = 2
 
