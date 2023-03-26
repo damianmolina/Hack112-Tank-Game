@@ -163,10 +163,10 @@ while running:
 
     for bullet in bullet_group1:
         if bulletHitsTank(bullet, tank2):
-            tank1.health -= 1
+            tank2.health -= 1
             bullet.kill()
             tank1BulletCount -= 1
-            if tank1.noHealth():
+            if tank2.noHealth():
                 gameInfo.p1score += 1
             tank2TimeSinceLastBullet = steps
 
