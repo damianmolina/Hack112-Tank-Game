@@ -98,7 +98,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    if (steps % 1000 < 20):
+    if (575 < steps % 1000 < 580):
         kosbie = pygame.image.load("king.png")
         kosbie = pygame.transform.scale(kosbie, (3000, 600))
         screen.blit(kosbie, (-1300, 0))
