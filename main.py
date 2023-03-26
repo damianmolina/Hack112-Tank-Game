@@ -97,9 +97,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    printText("SCORES",font,(0,0,0),253,40)
-    printText(f"Player1: {gameInfo.p1score}",font,(0,0,0),250,60)
-    printText(f"Player2: {gameInfo.p2score}",font,(0,0,0),250,85)
+    printText("SCORES",font,(0,0,0),173,40)
+    printText(f"Player1: {gameInfo.p1score}",font,(0,0,0),170,60)
+    printText(f"Player2: {gameInfo.p2score}",font,(0,0,0),170,85)
+    printText("HEALTH",font,(0,0,0),333,40)
+    printText(f"Player1: {tank1.health}",font,(0,0,0),330,60)
+    printText(f"Player2: {tank2.health}",font,(0,0,0),330,85)
     pygame.display.flip()
     steps = step(steps)
     if steps % 60 == 0:
