@@ -1,6 +1,8 @@
 import pygame
 from tankClass import Tank
 from board import GridSquare
+from gameInfo import GameInfo
+pygame.font.init()
 
 pygame.init()
 width = 600
@@ -9,13 +11,22 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 
-#tank group
-tankWidth, tankHeight = 50, 50
-tank1 = Tank(tankWidth, tankHeight, 200, 200, (255,255,255), 2)
+tankHeight = 25
+tankWidth = 25
+tank1 = Tank(50, 50, 200, 200, 2)
+
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 xSpeed, ySpeed = 10, 10
 screen.fill("red")
+
+#Game info text
+#Tutorial: https://www.youtube.com/watch?v=ndtFoWWBAoE
+gameInfo = GameInfo()
+font = pygame.font.SysFont("Arial", 24)
+def printText(text, font, color, x, y):
+    image = font.render(text, True, color)
+    screen.blit(image, (x, y))
 
 gridSquare_group = pygame.sprite.Group()
 walls = dict()
@@ -31,6 +42,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    printText("SCORES",font,(0,0,0),253,40)
+    printText(f"Player1: {gameInfo.p1score}",font,(0,0,0),250,60)
+    printText(f"Player2: {gameInfo.p2score}",font,(0,0,0),250,85)
+
     pygame.display.flip()
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
@@ -43,6 +58,7 @@ while running:
         tank1.moveTank(0, ySpeed * -1)
     elif keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < height:
         tank1.moveTank(0, ySpeed)
+
 
     #draw tank
     screen.fill("red")
