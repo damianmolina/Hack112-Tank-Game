@@ -20,6 +20,21 @@ def collideAny(tankX, tankY, walls):
         if walls[item] and collide(tankX, tankY, item[0], item[1]): return True
     return False
 
+def bulletCollide(bulletX, bulletY, wallX, wallY):
+    wallLeft = 50 * wallX + 25
+    wallRight = wallLeft + 50
+    wallTop = wallY*50 + 125
+    wallBottom = wallTop + 50
+    if wallLeft<bulletX+10<wallRight or wallLeft<bulletX-15<wallRight:
+        if wallTop<bulletX+10<wallBottom or wallTop<bulletY-15<wallBottom:
+            return True
+    return False
+
+def bulletCollide(bulletX, bulletY, walls):
+    for wall in walls:
+        if walls[wall] and collide(bulletX, bulletY, wall[0], wall[1]): return True
+    return False
+
 pygame.init()
 width = 600
 height = 600
@@ -109,6 +124,10 @@ while running:
     if steps % 5 == 0:
         for bullet in bullet_group:
             bullet.move()
+            if bulletCollide(bullet.cx, bullet.cy, walls):
+                bullet.bounce()
+                if bullet.destroy:
+                    bullet_group.remove(bullet)
 
 
     if not collideAny(tank1.x, tank1.y, walls):

@@ -82,4 +82,20 @@ class Bullet(pygame.sprite.Sprite):
             self.hasBounced = True
         else:
             self.destroy = True
-    
+        self.image = pygame.Surface([20, 20])
+        self.image = pygame.image.load("bullet.png")
+        self.image = pygame.transform.scale(self.image, (20,20))
+        if dir == 1:
+            self.image = pygame.transform.rotate(self.image, 45)
+        if dir == 3:
+            self.image = pygame.transform.rotate(self.image, -45)
+        if dir == 4:
+            self.image = pygame.transform.rotate(self.image, 90)
+        if dir == -4:
+            self.image = pygame.transform.rotate(self.image, -90)
+        if dir == -1:
+            self.image = pygame.transform.rotate(self.image, 135)
+        if dir == -3:
+            self.image = pygame.transform.rotate(self.image, -135)
+        if dir == -2:
+            self.image = pygame.transform.rotate(self.image, 180)
