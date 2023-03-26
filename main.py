@@ -16,16 +16,16 @@ def bulletHitsTank(bullet, tank):
 def checkBullet(bullet):
     if bullet.cx <= 35:
         while bullet.cx <= 35: bullet.cx += 1
-        bullet.bounce("LR")
+        if bullet.bounce("LR"): return True
     if bullet.cx >= 565: 
         while bullet.cx >= 565: bullet.cx -= 1
-        bullet.bounce("LR")
+        if bullet.bounce("LR"): return True
     if bullet.cy <= 135:
         while bullet.cy <= 135: bullet.cy += 1
-        bullet.bounce("TB")
+        if bullet.bounce("TB"): return True
     if bullet.cy >= 565:
         while bullet.cy >= 565: bullet.cy -= 1
-        bullet.bounce("TB")
+        if bullet.bounce("TB"): return True
 
 def collide(tankX, tankY, wallX, wallY):
     wallLeft = 50*wallX + 25
@@ -108,9 +108,11 @@ while running:
     keys = pygame.key.get_pressed()
 
     for bullet in bullet_group1:
-        checkBullet(bullet)
+        if checkBullet(bullet):
+            tank1BulletCount -= 1
     for bullet in bullet_group2:
-        checkBullet(bullet)
+        if checkBullet(bullet):
+            tank2BulletCount -= 1
 
     if keys[pygame.K_LSHIFT] and tank1BulletCount < 3:
         if tank1BulletCount == 0:
@@ -159,6 +161,8 @@ while running:
     for bullet in bullet_group1:
         if bulletHitsTank(bullet, tank2):
             tank1.health -= 1
+            bullet.kill()
+            tank1BulletCount -= 1
             if tank1.noHealth():
                 gameInfo.p1score += 1
             tank2TimeSinceLastBullet = steps
@@ -167,6 +171,8 @@ while running:
     for bullet in bullet_group2:
         if bulletHitsTank(bullet, tank1):
             tank1.health -= 1
+            bullet.kill()
+            tank2BulletCount -= 1
             if tank1.noHealth():
                 gameInfo.p2score += 1
 
