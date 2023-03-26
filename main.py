@@ -20,7 +20,8 @@ tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 tank_group.add(tank2)
 xSpeed, ySpeed = 3, 3
-screen.fill("red")
+bgColor = 129,152,156
+screen.fill(bgColor)
 
 #Game info text
 #Tutorial: https://www.youtube.com/watch?v=ndtFoWWBAoE
@@ -71,7 +72,7 @@ while running:
 
 
     #draw tank
-    screen.fill("red")
+    screen.fill(bgColor)
 
     gridSquare_group.draw(screen)
     tank_group.draw(screen)
