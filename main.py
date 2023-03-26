@@ -2,15 +2,36 @@ import pygame
 from tankClass import Tank
 from board import GridSquare
 
+# Constant stuff
 pygame.init()
 width = 600
 height = 600
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-
 tankHeight = 25
 tankWidth = 25
+
+def isCollision(tank):
+    # Checking if collision with white border
+    if (tank.x - tankWidth < 25):
+        tank.x = tankWidth + 25
+        return True
+    elif (tank.x + tankWidth > 575):
+        tank.x = 575 - tankWidth
+        return True
+    elif (tank.y - tankHeight < 125):
+        tank.y = 125 + tankHeight
+        return True
+    elif (tank.y + tankHeight > 575):
+        tank.y = 575 - tankHeight
+        return True
+    else:
+        return False
+
+
+
+# Creation of tank
 tank1 = Tank(50, 50, 200, 200, 2)
 
 tank_group = pygame.sprite.Group()
@@ -36,13 +57,13 @@ while running:
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 0:
+    if keys[pygame.K_LEFT] and not isCollision(tank1):
         tank1.moveTank(xSpeed * -1, 0)
-    elif keys[pygame.K_RIGHT] and tank1.rect.center[0] + tankWidth <= width:
+    elif keys[pygame.K_RIGHT] and not isCollision(tank1):
         tank1.moveTank(xSpeed, 0)
-    elif keys[pygame.K_UP] and tank1.rect.center[1] - tankHeight > 0:
+    elif keys[pygame.K_UP] and not isCollision(tank1):
         tank1.moveTank(0, ySpeed * -1)
-    elif keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < height:
+    elif keys[pygame.K_DOWN] and not isCollision(tank1):
         tank1.moveTank(0, ySpeed)
 
     #draw tank
