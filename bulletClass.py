@@ -15,6 +15,20 @@ class Bullet(pygame.sprite.Sprite):
         self.hasBounced = False
         self.steps = 0
         self.destroy = False
+        if dir == 1:
+            self.image = pygame.transform.rotate(self.image, 45)
+        if dir == 3:
+            self.image = pygame.transform.rotate(self.image, -45)
+        if dir == 4:
+            self.image = pygame.transform.rotate(self.image, 90)
+        if dir == -4:
+            self.image = pygame.transform.rotate(self.image, -90)
+        if dir == -1:
+            self.image = pygame.transform.rotate(self.image, 135)
+        if dir == -3:
+            self.image = pygame.transform.rotate(self.image, -135)
+        if dir == -2:
+            self.image = pygame.transform.rotate(self.image, 180)
         
     
     def __repr__(self):
@@ -29,6 +43,7 @@ class Bullet(pygame.sprite.Sprite):
         return hash(str(self))
     
     def move(self):
+        self.steps += 1
         if self.dir == 1:
             if self.steps % 2:
                 self.cx -= 1
@@ -59,9 +74,7 @@ class Bullet(pygame.sprite.Sprite):
                 self.cy += 1
         self.rect.center = [self.cx, self.cy]
     
-    def step(self):
-        self.steps += 1
-        self.move()
+
     
     def bounce(self):
         if not self.hasBounced:
