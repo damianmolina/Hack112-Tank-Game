@@ -4,6 +4,21 @@ from board import GridSquare
 from gameInfo import GameInfo
 pygame.font.init()
 
+def collide(tankX, tankY, wallX, wallY):
+    wallLeft = 50*wallX + 25
+    wallRight = wallLeft + 50
+    wallTop = wallY * 50 + 125
+    wallBottom = wallTop + 50
+    if wallLeft<tankX+15<wallRight or wallLeft<tankX-15<wallRight:
+        if wallTop<tankY+15<wallBottom or wallTop<tankY-15<wallBottom:
+            return True
+    return False
+
+def collideAny(tankX, tankY, walls):
+    for item in walls:
+        if walls[item] and collide(tankX, tankY, item[0], item[1]): return True
+    return False
+
 pygame.init()
 width = 600
 height = 600
@@ -53,23 +68,41 @@ while running:
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
-        tank2.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_RIGHT] and tank2.rect.center[0] + tankWidth <= 580:
-        tank2.moveTank(xSpeed, 0)
-    if keys[pygame.K_UP] and tank2.rect.center[1] - tankHeight > 120:
-        tank2.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_DOWN] and tank2.rect.center[1] + tankHeight < 580:
-        tank2.moveTank(0, ySpeed)
-    if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:
-        tank1.moveTank(xSpeed * -1, 0)
-    if keys[pygame.K_d] and tank1.rect.center[0] + tankWidth <= 580:
-        tank1.moveTank(xSpeed, 0)
-    if keys[pygame.K_w] and tank1.rect.center[1] - tankHeight > 120:
-        tank1.moveTank(0, ySpeed * -1)
-    if keys[pygame.K_s] and tank1.rect.center[1] + tankHeight < 580:
-        tank1.moveTank(0, ySpeed)
+    if not collideAny(tank1.x, tank1.y, walls):
+        if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:
+            tank1.moveTank(xSpeed * -1, 0)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(xSpeed, 0)
+        if keys[pygame.K_d] and tank1.rect.center[0] + tankWidth <= 580:
+            tank1.moveTank(xSpeed, 0)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(xSpeed*-1, 0)
+        if keys[pygame.K_w] and tank1.rect.center[1] - tankHeight > 120:
+            tank1.moveTank(0, ySpeed * -1)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(0, ySpeed)
+        if keys[pygame.K_s] and tank1.rect.center[1] + tankHeight < 580:
+            tank1.moveTank(0, ySpeed)
+            if collideAny(tank1.x, tank1.y, walls):
+                tank1.moveTank(0, ySpeed * -1)
 
+    if not collideAny(tank2.x, tank2.y, walls):
+        if keys[pygame.K_LEFT] and tank2.rect.center[0] - tankWidth >= 20:
+            tank2.moveTank(xSpeed * -1, 0)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(xSpeed, 0)
+        if keys[pygame.K_RIGHT] and tank2.rect.center[0] + tankWidth <= 580:
+            tank2.moveTank(xSpeed, 0)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(xSpeed*-1, 0)
+        if keys[pygame.K_UP] and tank2.rect.center[1] - tankHeight > 120:
+            tank2.moveTank(0, ySpeed * -1)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(0, ySpeed)
+        if keys[pygame.K_DOWN] and tank2.rect.center[1] + tankHeight < 580:
+            tank2.moveTank(0, ySpeed)
+            if collideAny(tank2.x, tank2.y, walls):
+                tank2.moveTank(0, ySpeed * -1)
 
     #draw tank
     screen.fill(bgColor)
