@@ -160,11 +160,15 @@ while running:
 
     for bullet in bullet_group1:
         if bulletHitsTank(bullet, tank2):
-            print("Nice!")
+            tank2.health -= 1
+            tank2.noHealth()
+            print(tank2.health)
 
     for bullet in bullet_group2:
         if bulletHitsTank(bullet, tank1):
-            print("Cool!")
+            tank1.health -= 1
+            tank1.noHealth()
+            print(tank1.health)
 
 
     if not collideAny(tank2.x, tank2.y, walls):
