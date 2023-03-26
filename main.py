@@ -13,11 +13,13 @@ running = True
 
 tankHeight = 25
 tankWidth = 25
-tank1 = Tank(50, 50, 200, 200, 2)
+tank1 = Tank(tankWidth, tankHeight, 100, 350, 2)
+tank2 = Tank(tankWidth, tankHeight, 500, 350, 2)
 
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
-xSpeed, ySpeed = 10, 10
+tank_group.add(tank2)
+xSpeed, ySpeed = 3, 3
 screen.fill("red")
 
 #Game info text
@@ -58,6 +60,14 @@ while running:
         tank1.moveTank(0, ySpeed * -1)
     if keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < 580:
         tank1.moveTank(0, ySpeed)
+    if keys[pygame.K_a] and tank2.rect.center[0] - tankWidth >= 20:
+        tank2.moveTank(xSpeed * -1, 0)
+    if keys[pygame.K_d] and tank2.rect.center[0] + tankWidth <= 580:
+        tank2.moveTank(xSpeed, 0)
+    if keys[pygame.K_w] and tank2.rect.center[1] - tankHeight > 120:
+        tank2.moveTank(0, ySpeed * -1)
+    if keys[pygame.K_s] and tank2.rect.center[1] + tankHeight < 580:
+        tank2.moveTank(0, ySpeed)
 
 
     #draw tank
