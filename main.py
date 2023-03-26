@@ -50,13 +50,13 @@ while running:
 
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygame/
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 0:
+    if keys[pygame.K_LEFT] and tank1.rect.center[0] - tankWidth >= 20:
         tank1.moveTank(xSpeed * -1, 0)
-    elif keys[pygame.K_RIGHT] and tank1.rect.center[0] + tankWidth <= width:
+    if keys[pygame.K_RIGHT] and tank1.rect.center[0] + tankWidth <= 580:
         tank1.moveTank(xSpeed, 0)
-    elif keys[pygame.K_UP] and tank1.rect.center[1] - tankHeight > 0:
+    if keys[pygame.K_UP] and tank1.rect.center[1] - tankHeight > 120:
         tank1.moveTank(0, ySpeed * -1)
-    elif keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < height:
+    if keys[pygame.K_DOWN] and tank1.rect.center[1] + tankHeight < 580:
         tank1.moveTank(0, ySpeed)
 
 
