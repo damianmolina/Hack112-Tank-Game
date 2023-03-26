@@ -5,6 +5,20 @@ from gameInfo import GameInfo
 from bulletClass import Bullet
 pygame.font.init()
 
+def checkBullet(bullet):
+    if bullet.cx <= 35:
+        while bullet.cx <= 35: bullet.cx += 1
+        bullet.bounce("LR")
+    if bullet.cx >= 565: 
+        while bullet.cx >= 565: bullet.cx -= 1
+        bullet.bounce("LR")
+    if bullet.cy <= 135:
+        while bullet.cy <= 135: bullet.cy += 1
+        bullet.bounce("TB")
+    if bullet.cy >= 565:
+        while bullet.cy >= 565: bullet.cy -= 1
+        bullet.bounce("TB")
+
 def collide(tankX, tankY, wallX, wallY):
     wallLeft = 50*wallX + 25
     wallRight = wallLeft + 50
@@ -86,6 +100,9 @@ while running:
     #move tank from https://www.geeksforgeeks.org/python-moving-an-object-in-pygamae/
     keys = pygame.key.get_pressed()
 
+    for bullet in bullet_group:
+        checkBullet(bullet)
+
     if keys[pygame.K_LSHIFT] and tank1BulletCount < 3:
         if tank1BulletCount == 0:
             bullet0 = Bullet(20, 20, tank1.x, tank1.y, tank1Direction)
@@ -108,8 +125,7 @@ while running:
             tank2BulletCount += 1
     if steps % 5 == 0:
         for bullet in bullet_group:
-            bullet.move()
-
+            bullet.move(bullet.dx, bullet.dy)
 
     if not collideAny(tank1.x, tank1.y, walls):
         if keys[pygame.K_a] and tank1.rect.center[0] - tankWidth >= 20:

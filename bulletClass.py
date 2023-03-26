@@ -12,23 +12,31 @@ class Bullet(pygame.sprite.Sprite):
         self.cx =  cx
         self.cy = cy
         self.dir = dir
+        self.dx, self.dy = 0, -1
         self.hasBounced = False
         self.steps = 0
         self.destroy = False
         if dir == 1:
             self.image = pygame.transform.rotate(self.image, 45)
+            self.dx, self.dy = -1, -1
         if dir == 3:
             self.image = pygame.transform.rotate(self.image, -45)
+            self.dx, self.dy = 1, -1
         if dir == 4:
             self.image = pygame.transform.rotate(self.image, 90)
+            self.dx, self.dy = -1, 0
         if dir == -4:
             self.image = pygame.transform.rotate(self.image, -90)
+            self.dx, self.dy = 1, 0
         if dir == -1:
             self.image = pygame.transform.rotate(self.image, 135)
+            self.dx, self.dy = -1, 1
         if dir == -3:
             self.image = pygame.transform.rotate(self.image, -135)
+            self.dx, self.dy = 1, 1
         if dir == -2:
             self.image = pygame.transform.rotate(self.image, 180)
+            self.dx, self.dy = 0, 1
         
     
     def __repr__(self):
@@ -42,44 +50,14 @@ class Bullet(pygame.sprite.Sprite):
     def __hash__(self):
         return hash(str(self))
     
-    def move(self):
-        self.steps += 1
-        if self.dir == 1:
-            if self.steps % 2:
-                self.cx -= 1
-            else:
-                self.cy -= 1
-        elif self.dir == 2:
-            self.cy -= 1
-        elif self.dir == 3:
-            if self.steps % 2:
-                self.cx += 1
-            else:
-                self.cy -= 1
-        elif self.dir == 4:
-            self.cx -= 1
-        elif self.dir == -4:
-            self.cx += 1
-        elif self.dir == -1:
-            if self.steps % 2:
-                self.cx -= 1
-            else:
-                self.cy += 1
-        elif self.dir == -2:
-            self.cy += 1
-        else:
-            if self.steps % 2:
-                self.cx += 1
-            else:
-                self.cy += 1
+    def move(self, dx, dy):
+        self.cx += dx
+        self.cy += dy
         self.rect.center = [self.cx, self.cy]
     
-
-    
-    def bounce(self):
-        if not self.hasBounced:
-            self.dir = -self.dir
-            self.hasBounced = True
+    def bounce(self, dirCall):
+        if dirCall == "TB":
+            self.dy = -self.dy
         else:
-            self.destroy = True
+            self.dx = -self.dx
     

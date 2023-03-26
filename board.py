@@ -14,7 +14,7 @@ class GridSquare(pygame.sprite.Sprite):
             self.isWall = True
         else: self.isWall = False
         if self.isWall:
-            self.image = pygame.image.load('brick.png')
+            self.image = pygame.image.load('bighole.jpg')
         else: 
             self.image = pygame.image.load("grass.jpg")
         self.image = pygame.transform.scale(self.image, (50,50))
