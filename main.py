@@ -50,8 +50,8 @@ second = 0
 steps = 0
 tankHeight = 25
 tankWidth = 25
-tank1 = Tank(tankWidth, tankHeight, 100, 350, 2)
-tank2 = Tank(tankWidth, tankHeight, 500, 350, 2)
+tank1 = Tank(tankWidth, tankHeight, 100, 350, 2, 3)
+tank2 = Tank(tankWidth, tankHeight, 500, 350, 2, 3)
 tank_group = pygame.sprite.Group()
 tank_group.add(tank1)
 tank_group.add(tank2)
