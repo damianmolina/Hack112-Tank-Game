@@ -92,6 +92,7 @@ for x in range(11):
         walls[(x,y)] = currSquare.isWall
 
 
+
 #from https://www.pygame.org/docs/
 while running:
     for event in pygame.event.get():
@@ -168,6 +169,14 @@ while running:
             tank1BulletCount -= 1
             if tank2.noHealth():
                 gameInfo.p1score += 1
+                gridSquare_group = pygame.sprite.Group()
+                walls = dict()
+                for x in range(11):
+                    for y in range(9):
+                        currSquare = GridSquare(x, y)
+                        gridSquare_group.add(currSquare)
+                        walls[(x,y)] = currSquare.isWall
+                tank1.respawn()
             tank2TimeSinceLastBullet = steps
 
 
@@ -178,6 +187,14 @@ while running:
             tank2BulletCount -= 1
             if tank1.noHealth():
                 gameInfo.p2score += 1
+                gridSquare_group = pygame.sprite.Group()
+                walls = dict()
+                for x in range(11):
+                    for y in range(9):
+                        currSquare = GridSquare(x, y)
+                        gridSquare_group.add(currSquare)
+                        walls[(x,y)] = currSquare.isWall
+                tank2.respawn()
 
 
 
