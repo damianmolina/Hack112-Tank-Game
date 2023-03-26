@@ -13,7 +13,7 @@ class Bullet(pygame.sprite.Sprite):
         self.cy = cy
         self.dir = dir
         self.dx, self.dy = 0, -1
-        self.hasBounced = False
+        self.hasBounced = 0
         self.steps = 0
         self.destroy = False
         if dir == 1:
@@ -56,8 +56,12 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.center = [self.cx, self.cy]
     
     def bounce(self, dirCall):
-        if dirCall == "TB":
-            self.dy = -self.dy
+        if self.hasBounced < 2:
+            if dirCall == "TB":
+                self.dy = -self.dy
+            else:
+                self.dx = -self.dx
+            self.hasBounced += 1
         else:
-            self.dx = -self.dx
+            pygame.sprite.Sprite.kill(self)
     
