@@ -5,6 +5,13 @@ from gameInfo import GameInfo
 from bulletClass import Bullet
 pygame.font.init()
 
+def bulletHitsTank(bullet, tank):
+    if tank.x-15 <= bullet.cx <= tank.x+15:
+        if tank.y-15 <= bullet.cy <= tank.y+15:
+            return True
+    return False
+
+
 def checkBullet(bullet):
     if bullet.cx <= 35:
         while bullet.cx <= 35: bullet.cx += 1
@@ -149,6 +156,14 @@ while running:
             tank1Direction = -2
             if collideAny(tank1.x, tank1.y, walls):
                 tank1.moveTank(0, ySpeed * -1)
+
+    for bullet in bullet_group1:
+        if bulletHitsTank(bullet, tank2):
+            print("Nice!")
+
+    for bullet in bullet_group2:
+        if bulletHitsTank(bullet, tank1):
+            print("Cool!")
 
 
     if not collideAny(tank2.x, tank2.y, walls):
